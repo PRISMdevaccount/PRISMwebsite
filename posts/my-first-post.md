@@ -1,6 +1,6 @@
 ---
 title: How PRISM Came to Life
-date: 2025-07-15
+date: "2025-07-15"
 excerpt: Learn how the idea for PRISM originated and evolved into a real product.
 image: /blog/prism-story.png
 ---
