@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllPosts } from '@/lib/blog';
+import { getAllPosts } from '../lib/blog';
 
 export default function BlogSlider() {
   const posts = getAllPosts();
