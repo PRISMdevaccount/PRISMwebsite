@@ -1,8 +1,8 @@
-import { getAllPosts } from '@/lib/blog';
+import { getAllPosts } from '../lib/blog';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
-import Navbar from '@/components/Navbar';
+import Navbar from '../components/Navbar';
 
 export default function BlogIndex() {
   const posts = getAllPosts();
