@@ -1,12 +1,15 @@
-import { getAllPosts } from '../../lib/blog';
-import Link from 'next/link';
-import Image from 'next/image';
 import Head from 'next/head';
 import Navbar from '../../components/Navbar';
+import Link from 'next/link';
+import Image from 'next/image';
+import { getAllPosts } from '../../lib/get-posts';
 
-export default function BlogIndex() {
+export async function getStaticProps() {
   const posts = getAllPosts();
+  return { props: { posts } };
+}
 
+export default function BlogIndex({ posts }) {
   return (
     <>
       <Head>
