@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllPosts } from '../lib/blog';
 
-export default function BlogSlider() {
-  const posts = getAllPosts();
-
+export default function BlogSlider({ posts }) {
   return (
     <section className="py-12 px-6 bg-secondary/10">
       <h2 className="text-3xl font-bold text-center mb-8 text-primary">Inside PRISM</h2>
