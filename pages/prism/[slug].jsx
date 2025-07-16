@@ -1,21 +1,22 @@
-import { getPostBySlug, getAllPosts } from '@/lib/blog';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { getPostBySlug, getAllPosts } from '../../lib/blog';
 import Head from 'next/head';
-import Navbar from '@/components/Navbar';
+import Navbar from '../../components/Navbar';
 import ReactMarkdown from 'react-markdown';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   const posts = getAllPosts();
-  const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
   return { paths, fallback: false };
-};
+}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = getPostBySlug(params!.slug as string);
+export async function getStaticProps({ params }) {
+  const post = getPostBySlug(params.slug);
   return { props: { post } };
-};
+}
 
-export default function BlogPost({ post }: any) {
+export default function BlogPost({ post }) {
   return (
     <>
       <Head>
