@@ -7,26 +7,28 @@ export default function BlogSlider({ posts }) {
 
   useEffect(() => {
     const slider = sliderRef.current;
+    if (!slider || posts.length <= 1) return;
+
     let scrollAmount = 0;
 
     const scrollInterval = setInterval(() => {
-      if (!slider) return;
       scrollAmount += 1;
       slider.scrollLeft = scrollAmount;
 
       if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
-        scrollAmount = 0; // loop back
+        scrollAmount = 0;
       }
-    }, 20); // adjust speed here (lower = faster)
+    }, 20); // Speed: lower = faster
 
     return () => clearInterval(scrollInterval);
-  }, []);
+  }, [posts]);
 
   return (
     <section className="py-12 px-6 bg-secondary/10">
       <h2 className="text-3xl font-bold text-center mb-8 text-primary">
         Inside PRISM
       </h2>
+
       <div
         ref={sliderRef}
         className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4"
@@ -36,26 +38,29 @@ export default function BlogSlider({ posts }) {
         }}
       >
         {posts.map((post) => (
-          <Link
+          <div
             key={post.slug}
-            href={`/prism/${post.slug}`}
-            className="min-w-[300px] max-w-sm inline-block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+            className="min-w-[300px] max-w-[320px] inline-block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden"
           >
-            <div className="relative w-full h-48 rounded-t-xl overflow-hidden">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-4">
-              <h3 className="text-xl font-semibold text-gray-800">
-                {post.title}
-              </h3>
-              <p className="text-gray-600 text-sm mt-2">{post.excerpt}</p>
-            </div>
-          </Link>
+            <Link href={`/prism/${post.slug}`} className="block">
+              <div className="relative h-48 w-full">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-xl font-semibold text-gray-800 line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 text-sm mt-2 line-clamp-3">
+                  {post.excerpt}
+                </p>
+              </div>
+            </Link>
+          </div>
         ))}
       </div>
     </section>
