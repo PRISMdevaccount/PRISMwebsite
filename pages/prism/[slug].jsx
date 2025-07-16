@@ -1,4 +1,4 @@
-import { getPostBySlug, getAllPosts } from '../../lib/blog';
+import { getAllPosts, getPostBySlug } from '../../lib/get-posts';
 import Head from 'next/head';
 import Navbar from '../../components/Navbar';
 import ReactMarkdown from 'react-markdown';
