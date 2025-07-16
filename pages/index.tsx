@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import BlogSlider from '@/components/BlogSlider';
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       </Head>
       <Navbar />
       <Hero />
-      {/* We'll add the BlogSlider, Story, and Contact sections next */}
+      <BlogSlider />
     </>
   );
 }
