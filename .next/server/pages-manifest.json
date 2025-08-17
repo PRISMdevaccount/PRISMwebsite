@@ -1,1 +1,1 @@
-{"/_error":"pages/_error.js","/_app":"pages/_app.js","/prism/[slug]":"pages/prism/[slug].js","/":"pages/index.js","/prism":"pages/prism.js","/_document":"pages/_document.js","/404":"pages/404.html"}
+{"/_app":"pages/_app.js","/_error":"pages/_error.js","/":"pages/index.js","/prism/[slug]":"pages/prism/[slug].js","/prism":"pages/prism.js","/about":"pages/about.html","/_document":"pages/_document.js","/404":"pages/404.html"}

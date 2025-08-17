@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/WtzEUvMD0aF6fedpQqKWP/_buildManifest.js",
-    "static/WtzEUvMD0aF6fedpQqKWP/_ssgManifest.js"
+    "static/VfEjueLYY62Md342BobXx/_buildManifest.js",
+    "static/VfEjueLYY62Md342BobXx/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -14,14 +14,15 @@
       "static/chunks/webpack-b8f8d6679aaa5f42.js",
       "static/chunks/framework-5429a50ba5373c56.js",
       "static/chunks/main-930135e47dff83e9.js",
-      "static/chunks/247-f79fefcd52c96378.js",
-      "static/chunks/pages/index-8e24e73c14e4dd63.js"
+      "static/chunks/675-9fcdb742a32f88a7.js",
+      "static/chunks/996-923ee8e3cff567be.js",
+      "static/chunks/pages/index-4e58486de175cac5.js"
     ],
     "/_app": [
       "static/chunks/webpack-b8f8d6679aaa5f42.js",
       "static/chunks/framework-5429a50ba5373c56.js",
       "static/chunks/main-930135e47dff83e9.js",
-      "static/css/75fcb78f97a39368.css",
+      "static/css/18226e7656fc7138.css",
       "static/chunks/pages/_app-ed6998ad6a3321ad.js"
     ],
     "/_error": [
@@ -30,20 +31,30 @@
       "static/chunks/main-930135e47dff83e9.js",
       "static/chunks/pages/_error-5a00309fd5f4b49e.js"
     ],
+    "/about": [
+      "static/chunks/webpack-b8f8d6679aaa5f42.js",
+      "static/chunks/framework-5429a50ba5373c56.js",
+      "static/chunks/main-930135e47dff83e9.js",
+      "static/chunks/675-9fcdb742a32f88a7.js",
+      "static/chunks/93-a23e0d58620c3772.js",
+      "static/chunks/pages/about-cf9c400218ad786e.js"
+    ],
     "/prism": [
       "static/chunks/webpack-b8f8d6679aaa5f42.js",
       "static/chunks/framework-5429a50ba5373c56.js",
       "static/chunks/main-930135e47dff83e9.js",
-      "static/chunks/247-f79fefcd52c96378.js",
-      "static/chunks/pages/prism-59b142549297fe47.js"
+      "static/chunks/675-9fcdb742a32f88a7.js",
+      "static/chunks/996-923ee8e3cff567be.js",
+      "static/chunks/pages/prism-fedbe1c570099c2a.js"
     ],
     "/prism/[slug]": [
       "static/chunks/webpack-b8f8d6679aaa5f42.js",
       "static/chunks/framework-5429a50ba5373c56.js",
       "static/chunks/main-930135e47dff83e9.js",
-      "static/chunks/247-f79fefcd52c96378.js",
+      "static/chunks/675-9fcdb742a32f88a7.js",
+      "static/chunks/996-923ee8e3cff567be.js",
       "static/chunks/885-09ec39bddcd0900d.js",
-      "static/chunks/pages/prism/[slug]-9f5c83ff8d273321.js"
+      "static/chunks/pages/prism/[slug]-dbbd3b5cb8e6b00d.js"
     ]
   },
   "ampFirstPages": []
