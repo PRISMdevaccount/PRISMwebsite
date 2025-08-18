@@ -1,26 +1,29 @@
-import Prism3D from './PRISM3D';
+// components/Hero.jsx
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Dynamically import PRISM3D and disable SSR
+const PRISM3D = dynamic(() => import('./PRISM3D'), { ssr: false });
 
 export default function Hero() {
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-between bg-white px-6 md:px-20 py-20">
-      
-      {/* Left side: Title & Description */}
-      <div className="md:w-1/2 mb-10 md:mb-0">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+    <section className="hero-container flex flex-col md:flex-row items-center justify-between px-6 py-12 bg-white">
+      {/* Left side: Text */}
+      <div className="hero-text flex-1 mb-8 md:mb-0 md:pr-12">
+        <h1 className="text-5xl font-bold text-purple-800">
           PRISM
         </h1>
-        <p className="text-lg md:text-xl text-gray-700">
-          Pancreatic Mixed Reality Innovation for Surgical Management.
-          Helps surgeons during pre-operative and intra-operative phases by
-          providing AI-assisted organ and tumor detection in real time.
+        <p className="mt-4 text-lg text-gray-700">
+          Surgical AI Assistant for pancreatic surgery
         </p>
       </div>
 
       {/* Right side: 3D Model */}
-      <div className="md:w-1/2 w-full hover:scale-105 transition-transform duration-500">
-        <Prism3D />
+      <div className="hero-model flex-1 w-full md:w-auto h-96">
+        <Suspense fallback={<div className="text-center">Loading 3D Model...</div>}>
+          <PRISM3D />
+        </Suspense>
       </div>
-
     </section>
   );
 }

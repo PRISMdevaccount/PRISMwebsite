@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { MeshStandardMaterial } from 'three';
+import * as THREE from 'three'; // Make sure this is client-side
 
 function TriangularPrism() {
   const meshRef = useRef();
 
-  // Rotate the prism
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.01;
@@ -13,20 +12,18 @@ function TriangularPrism() {
     }
   });
 
-  // Define a triangular shape
   const shape = new THREE.Shape();
   shape.moveTo(0, 0);
   shape.lineTo(1, 0);
   shape.lineTo(0.5, 1);
   shape.lineTo(0, 0);
 
-  // Extrude settings to give it depth
   const extrudeSettings = { depth: 1, bevelEnabled: false };
   const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
 
   return (
     <mesh ref={meshRef} geometry={geometry}>
-      <MeshStandardMaterial color="purple" />
+      <meshStandardMaterial color="purple" />
     </mesh>
   );
 }
