@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
@@ -50,7 +49,7 @@ function PRISMTetrahedron() {
   geometry.computeVertexNormals();
 
   return (
-    <mesh ref={meshRef} geometry={geometry}>
+    <mesh ref={meshRef} geometry={geometry} scale={2}>
       <meshBasicMaterial vertexColors side={THREE.DoubleSide} />
     </mesh>
   );
