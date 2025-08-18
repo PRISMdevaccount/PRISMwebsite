@@ -1,44 +1,42 @@
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { MeshStandardMaterial } from 'three';
 
-function PrismMesh() {
-  const ref = useRef();
+function TriangularPrism() {
+  const meshRef = useRef();
 
-  // Rotate continuously
+  // Rotate the prism
   useFrame(() => {
-    ref.current.rotation.y += 0.01;
-    ref.current.rotation.x += 0.005;
+    if (meshRef.current) {
+      meshRef.current.rotation.y += 0.01;
+      meshRef.current.rotation.x += 0.005;
+    }
   });
 
+  // Define a triangular shape
+  const shape = new THREE.Shape();
+  shape.moveTo(0, 0);
+  shape.lineTo(1, 0);
+  shape.lineTo(0.5, 1);
+  shape.lineTo(0, 0);
+
+  // Extrude settings to give it depth
+  const extrudeSettings = { depth: 1, bevelEnabled: false };
+  const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+
   return (
-    <mesh ref={ref}>
-      {/* Box geometry: width, height, depth */}
-      <boxGeometry args={[2, 1, 1]} />
-      {/* Materials for each face: order is +x, -x, +y, -y, +z, -z */}
-      <meshStandardMaterial attach="material-0" color="#4B0082" /> {/* dark purple */}
-      <meshStandardMaterial attach="material-1" color="#C8A2C8" /> {/* light purple */}
-      <meshStandardMaterial attach="material-2" color="#90EE90" /> {/* light green */}
-      <meshStandardMaterial attach="material-3" color="#C8A2C8" /> {/* light purple */}
-      <meshStandardMaterial attach="material-4" color="#4B0082" /> {/* dark purple */}
-      <meshStandardMaterial attach="material-5" color="#90EE90" /> {/* light green */}
+    <mesh ref={meshRef} geometry={geometry}>
+      <MeshStandardMaterial color="purple" />
     </mesh>
   );
 }
 
-export default function Prism3D() {
+export default function PRISM3D() {
   return (
-    <div style={{ width: '100%', height: '500px' }}>
-      <Canvas>
-        {/* Lighting */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        {/* The prism mesh */}
-        <PrismMesh />
-        {/* Optional controls (rotate with mouse) */}
-        <OrbitControls enableZoom={false} />
-      </Canvas>
-    </div>
+    <Canvas camera={{ position: [3, 2, 5], fov: 50 }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <TriangularPrism />
+    </Canvas>
   );
 }
