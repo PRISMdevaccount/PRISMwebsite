@@ -1,4 +1,4 @@
-import Prism3D from './Prism3D';
+import Prism3D from './PRISM3D';
 
 export default function Hero() {
   return (
