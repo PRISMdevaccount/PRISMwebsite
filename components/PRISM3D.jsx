@@ -1,3 +1,4 @@
+
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
@@ -7,16 +8,21 @@ function PRISMTetrahedron() {
   
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.01; // rotate around Y axis (vertical)
+      meshRef.current.rotation.y += 0.01; // rotate around central Y-axis
     }
   });
 
-  // Perfect tetrahedron vertices
+  // Regular tetrahedron with one vertex at top, centered on Y-axis
+  const a = 1.632993; // edge length for unit tetrahedron
   const vertices = new Float32Array([
-    1, 1, 1,   -1, -1, 1,   -1, 1, -1,   // Face 1
-    1, 1, 1,   -1, -1, 1,    1, -1, -1,   // Face 2
-    1, 1, 1,   -1, 1, -1,    1, -1, -1,   // Face 3
-   -1, -1, 1,  -1, 1, -1,    1, -1, -1,   // Base (Face 4)
+    // Face 1 
+    0, a/2, 0,    -a/2, -a/6, a/(2*Math.sqrt(3)),    a/2, -a/6, a/(2*Math.sqrt(3)),
+    // Face 2  
+    0, a/2, 0,    a/2, -a/6, a/(2*Math.sqrt(3)),     0, -a/6, -a/Math.sqrt(3),
+    // Face 3 
+    0, a/2, 0,    0, -a/6, -a/Math.sqrt(3),          -a/2, -a/6, a/(2*Math.sqrt(3)),
+    // Base face
+    -a/2, -a/6, a/(2*Math.sqrt(3)),    0, -a/6, -a/Math.sqrt(3),    a/2, -a/6, a/(2*Math.sqrt(3)),
   ]);
 
   // One color per face
