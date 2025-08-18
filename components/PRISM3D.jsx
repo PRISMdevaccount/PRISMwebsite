@@ -6,26 +6,21 @@ function TriangularPrism() {
   const meshRef = useRef();
 
   useFrame(() => {
-    if (meshRef.current) meshRef.current.rotation.y += 0.01; // horizontal rotation
+    if (meshRef.current) meshRef.current.rotation.y += 0.01;
   });
 
-  // Vertices of a tetrahedron
+  // Vertices duplicated per face for proper per-face coloring
   const vertices = new Float32Array([
-    0, 1, 0,    // top vertex
-    -1, -1, -1, // base vertex 1
-    1, -1, -1,  // base vertex 2
-    0, -1, 1,   // base vertex 3
+    // Side 1
+     0, 1, 0,   -1, -1, 1,   1, -1, 1,
+    // Side 2
+     0, 1, 0,    1, -1, 1,   0, -1, -1,
+    // Side 3
+     0, 1, 0,    0, -1, -1, -1, -1, 1,
+    // Base
+    -1, -1, 1,   0, -1, -1,   1, -1, 1,
   ]);
 
-  // Faces (triangles) indices
-  const indices = new Uint16Array([
-    0, 1, 2, // side 1
-    0, 2, 3, // side 2
-    0, 3, 1, // side 3
-    1, 3, 2, // base
-  ]);
-
-  // Colors per face (each vertex in a face gets the same color)
   const colors = new Float32Array([
     // Side 1 - dark purple
     0.36, 0.17, 0.57,
@@ -47,12 +42,11 @@ function TriangularPrism() {
 
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   return (
     <mesh ref={meshRef} geometry={geometry}>
-      <meshStandardMaterial vertexColors={true} />
+      <meshStandardMaterial vertexColors={true} side={THREE.DoubleSide} />
     </mesh>
   );
 }
