@@ -1,51 +1,44 @@
-// components/PRISM3D.jsx
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
 import { useRef } from 'react';
 
 function TriangularPrism() {
   const meshRef = useRef();
 
-  // Rotate around Y-axis (horizontal rotation)
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.01;
+      meshRef.current.rotation.y += 0.01; // horizontal rotation
     }
   });
 
+  // 4 vertices of a tetrahedron
+  const vertices = new Float32Array([
+    0, 1, 0,    // top vertex
+    -1, -1, -1, // base vertex 1
+    1, -1, -1,  // base vertex 2
+    0, -1, 1,   // base vertex 3
+  ]);
+
+  // 4 triangular faces (indices)
+  const indices = new Uint16Array([
+    0, 1, 2, // side 1
+    0, 2, 3, // side 2
+    0, 3, 1, // side 3
+    1, 3, 2, // base
+  ]);
+
   return (
-    <mesh ref={meshRef} scale={[2, 2, 2]}>
-      <bufferGeometry attach="geometry">
+    <mesh ref={meshRef}>
+      <bufferGeometry>
         <bufferAttribute
-          attachObject={['attributes', 'position']}
-          count={12}
-          array={new Float32Array([
-            // Base triangle (y = -0.5)
-            -0.5, -0.5, -0.5,   0.5, -0.5, -0.5,   0, -0.5, 0.5,
-            // Top triangle (y = 0.5)
-            -0.5, 0.5, -0.5,    0.5, 0.5, -0.5,    0, 0.5, 0.5,
-          ])}
+          attach="attributes-position"
+          count={vertices.length / 3}
+          array={vertices}
           itemSize={3}
         />
-        <bufferAttribute
-          attachObject={['attributes', 'color']}
-          count={6}
-          array={new Float32Array([
-            0.5, 0.2, 0.8, // dark purple
-            0.8, 0.7, 1.0, // light purple
-            0.7, 1.0, 0.8, // light green
-            0.5, 0.2, 0.8,
-            0.8, 0.7, 1.0,
-            0.7, 1.0, 0.8,
-          ])}
-          itemSize={3}
-        />
+        <setIndex attach="index" array={indices} />
       </bufferGeometry>
 
-      {/* Materials for sides */}
-      <meshStandardMaterial color="#5D2C91" /> {/* Dark purple */}
-      <meshStandardMaterial color="#B8A2FF" /> {/* Light purple */}
-      <meshStandardMaterial color="#CFFFD6" /> {/* Light green */}
+      <meshStandardMaterial color="#5D2C91" /> {/* all faces same color */}
     </mesh>
   );
 }
