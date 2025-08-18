@@ -5,34 +5,23 @@ import * as THREE from 'three';
 function PRISMTetrahedron() {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
-  
-  useFrame((state) => {
+
+  useFrame(() => {
     if (meshRef.current) {
-      // Multi-axis rotation that creates a revolving effect
-      meshRef.current.rotation.x += 0.008;
-      meshRef.current.rotation.y += 0.012;
-      meshRef.current.rotation.z += 0.005;
-      
-      // Add some floating motion when hovered
-      if (hovered) {
-        meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1;
-        meshRef.current.scale.setScalar(1 + Math.sin(state.clock.elapsedTime * 3) * 0.05);
-      } else {
-        meshRef.current.position.y = 0;
-        meshRef.current.scale.setScalar(1);
-      }
+      // Revolving motion (like rotating around central vertical axis)
+      meshRef.current.rotation.y += 0.01;
     }
   });
 
-  // Perfect tetrahedron vertices
+  // Perfect tetrahedron vertices (same as before)
   const vertices = new Float32Array([
     1, 1, 1,   -1, -1, 1,   -1, 1, -1,   // Face 1
-    1, 1, 1,   -1, -1, 1,    1, -1, -1,   // Face 2
-    1, 1, 1,   -1, 1, -1,    1, -1, -1,   // Face 3
-   -1, -1, 1,  -1, 1, -1,    1, -1, -1,   // Base (Face 4)
+    1, 1, 1,   -1, -1, 1,    1, -1, -1,  // Face 2
+    1, 1, 1,   -1, 1, -1,    1, -1, -1,  // Face 3
+   -1, -1, 1,  -1, 1, -1,    1, -1, -1,  // Base (Face 4)
   ]);
 
-  // One color per face
+  // Face colors (kept vibrant)
   const faceColors = [
     "#5D2C91", // dark purple
     "#B8A2FF", // light purple
@@ -57,16 +46,15 @@ function PRISMTetrahedron() {
     <mesh
       ref={meshRef}
       geometry={geometry}
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
-      castShadow
-      receiveShadow
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+      scale={hovered ? 1.1 : 1} // hover scale-up
     >
-      <meshPhongMaterial 
-        vertexColors 
-        shininess={hovered ? 100 : 30}
-        transparent={hovered}
-        opacity={hovered ? 0.9 : 1}
+      <meshStandardMaterial
+        vertexColors
+        flatShading
+        emissive={hovered ? "#ffffff" : "#000000"} // glow effect on hover
+        emissiveIntensity={hovered ? 0.5 : 0}
       />
     </mesh>
   );
@@ -74,40 +62,14 @@ function PRISMTetrahedron() {
 
 export default function PRISM3D() {
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800">
-      <Canvas
-        camera={{ position: [5, 5, 5], fov: 50 }}
-        shadows
-      >
-        {/* Ambient light for overall illumination */}
-        <ambientLight intensity={0.4} />
-        
-        {/* Main directional light with shadows */}
-        <directionalLight
-          position={[10, 10, 5]}
-          intensity={1}
-          castShadow
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
-          shadow-camera-far={50}
-          shadow-camera-left={-10}
-          shadow-camera-right={10}
-          shadow-camera-top={10}
-          shadow-camera-bottom={-10}
-        />
-        
-        {/* Additional accent lights for more dramatic effect */}
-        <pointLight position={[-10, 0, -20]} color="#5D2C91" intensity={0.3} />
-        <pointLight position={[0, -10, 0]} color="#B8A2FF" intensity={0.2} />
-        
-        <PRISMTetrahedron />
-        
-        {/* Invisible ground plane to receive shadows */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3, 0]} receiveShadow>
-          <planeGeometry args={[20, 20]} />
-          <meshPhongMaterial transparent opacity={0} />
-        </mesh>
-      </Canvas>
-    </div>
+    <Canvas
+      camera={{ position: [4, 3, 6], fov: 50 }}
+      style={{ width: "100%", height: "500px" }}
+    >
+      {/* Lights for shadow and glow */}
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={1.2} castShadow />
+      <PRISMTetrahedron />
+    </Canvas>
   );
 }
