@@ -4,13 +4,19 @@ import * as THREE from 'three';
 
 function PRISMTetrahedron() {
   const meshRef = useRef();
-
-  useFrame(() => {
+  
+  useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.01; // smooth horizontal spin
+      // Multi-axis rotation with different speeds for more dynamic movement
+      meshRef.current.rotation.x += 0.005;
+      meshRef.current.rotation.y += 0.008;
+      meshRef.current.rotation.z += 0.003;
+      
+      // Subtle floating animation using sine wave
+      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
     }
   });
-
+  
   // Perfect tetrahedron vertices
   const vertices = new Float32Array([
     1, 1, 1,   -1, -1, 1,   -1, 1, -1,   // Face 1
@@ -18,7 +24,7 @@ function PRISMTetrahedron() {
     1, 1, 1,   -1, 1, -1,    1, -1, -1,   // Face 3
    -1, -1, 1,  -1, 1, -1,    1, -1, -1,   // Base (Face 4)
   ]);
-
+  
   // One color per face
   const faceColors = [
     "#5D2C91", // dark purple
@@ -26,7 +32,7 @@ function PRISMTetrahedron() {
     "#CFFFD6", // light green
     "#EBC7A8", // peach/tan
   ];
-
+  
   const colors = [];
   faceColors.forEach(hex => {
     const c = new THREE.Color(hex);
@@ -34,12 +40,12 @@ function PRISMTetrahedron() {
       colors.push(c.r, c.g, c.b);
     }
   });
-
+  
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
   geometry.setAttribute("color", new THREE.BufferAttribute(new Float32Array(colors), 3));
   geometry.computeVertexNormals();
-
+  
   return (
     <mesh ref={meshRef} geometry={geometry}>
       <meshBasicMaterial vertexColors side={THREE.DoubleSide} />
