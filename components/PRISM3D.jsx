@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
@@ -12,20 +11,12 @@ function PRISMTetrahedron() {
     }
   });
 
-  // Tetrahedron vertices positioned for Y-axis rotation
-  // Top vertex at (0, √(2/3), 0), bottom vertices forming equilateral triangle
-  const h = Math.sqrt(2/3); // height from center to top vertex
-  const r = Math.sqrt(3)/3; // radius of base triangle
-  
+  // Perfect tetrahedron vertices
   const vertices = new Float32Array([
-    // Face 1 (top vertex to two base vertices)
-    0, h, 0,    -r, -h/2, 0.5,    r, -h/2, 0.5,
-    // Face 2 (top vertex to two base vertices)  
-    0, h, 0,    r, -h/2, 0.5,     0, -h/2, -1,
-    // Face 3 (top vertex to two base vertices)
-    0, h, 0,    0, -h/2, -1,      -r, -h/2, 0.5,
-    // Face 4 (base triangle)
-    -r, -h/2, 0.5,    0, -h/2, -1,    r, -h/2, 0.5,
+    1, 1, 1,   -1, -1, 1,   -1, 1, -1,   // Face 1
+    1, 1, 1,   -1, -1, 1,    1, -1, -1,   // Face 2
+    1, 1, 1,   -1, 1, -1,    1, -1, -1,   // Face 3
+   -1, -1, 1,  -1, 1, -1,    1, -1, -1,   // Base (Face 4)
   ]);
 
   // One color per face
