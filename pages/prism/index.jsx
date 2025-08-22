@@ -1,7 +1,8 @@
-import SectionWrapper from "@/components/SectionWrapper";
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import BlogSlider from "@/components/BlogSlider";
+import SectionWrapper from "../../components/SectionWrapper";
+import Hero from "../../components/Hero";
+import Features from "../../components/Features";
+import BlogSlider from "../../components/BlogSlider";
+
 
 export default function Home({ posts }) {
   return (
