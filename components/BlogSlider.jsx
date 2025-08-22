@@ -52,7 +52,7 @@ export default function BlogSlider({ posts }) {
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        ✨ Inside PRISM ✨
+         Inside PRISM 
       </motion.h2>
 
       {/* Blog Slider */}
