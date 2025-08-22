@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllPosts } from '../../lib/get-posts';
-import SectionWrapper from '../../components/SectionWrapper';
+import SectionWrapper from '../../components/SectionWrapper'; // ✅ only this extra import
 
 export async function getStaticProps() {
   const posts = getAllPosts();
@@ -41,7 +41,9 @@ export default function BlogIndex({ posts }) {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-800">{post.title}</h3>
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {post.title}
+                  </h3>
                   <p className="text-sm text-gray-600 mt-2">{post.excerpt}</p>
                 </div>
               </Link>
@@ -52,4 +54,3 @@ export default function BlogIndex({ posts }) {
     </>
   );
 }
-npm 
