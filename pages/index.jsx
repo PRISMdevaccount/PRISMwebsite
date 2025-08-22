@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import BlogSlider from '../components/BlogSlider';
 import Story from '../components/Story';
 import Footer from '../components/Footer';
+import SectionWrapper from '../components/SectionWrapper'; // ✅ added
 import { getAllPosts } from '../lib/blog';
 
 export async function getStaticProps() {
@@ -18,10 +19,20 @@ export default function Home({ posts }) {
         <title>PRISM | Surgical AI Assistant</title>
       </Head>
       <Navbar />
-      <Hero />
-      <BlogSlider posts={posts} />
-      <Story />
-      <Footer />
+
+      <SectionWrapper>
+        <Hero />
+      </SectionWrapper>
+
+      <SectionWrapper>
+        <BlogSlider posts={posts} />
+      </SectionWrapper>
+
+      <SectionWrapper>
+        <Story />
+      </SectionWrapper>
+
+      <Footer /> {/* keep footer outside wrapper */}
     </>
   );
 }
