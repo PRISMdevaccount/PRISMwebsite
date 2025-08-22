@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import Features from "../components/Features";
-import SectionWrapper from "../components/SectionWrapper";
+import Navbar from "../../components/Navbar";
+import Hero from "../../components/Hero";
+import Features from "../../components/Features";
+import SectionWrapper from "../../components/SectionWrapper";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllPosts } from "../lib/get-posts";
+import { getAllPosts } from "../../lib/get-posts";
 
 export async function getStaticProps() {
   const posts = getAllPosts();
