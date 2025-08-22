@@ -7,22 +7,22 @@ export default function Story() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-purple-50 via-green-50 to-white py-24 px-6 overflow-hidden">
+    <section className="relative bg-gradient-to-r from-purple-50 via-purple-100 to-white py-24 px-6 overflow-hidden">
       {/* Decorative floating gradient prisms */}
-      <div className="absolute -top-24 -left-24 w-64 h-64 bg-gradient-to-r from-purple-300 to-green-300 rotate-45 opacity-20 blur-3xl animate-pulse"></div>
-      <div className="absolute -bottom-32 -right-24 w-64 h-64 bg-gradient-to-r from-green-300 to-purple-300 -rotate-12 opacity-20 blur-3xl animate-pulse"></div>
+      <div className="absolute -top-24 -left-24 w-64 h-64 bg-gradient-to-r from-purple-300 to-purple-400 rotate-45 opacity-20 blur-3xl animate-pulse"></div>
+      <div className="absolute -bottom-32 -right-24 w-64 h-64 bg-gradient-to-r from-purple-400 to-purple-200 -rotate-12 opacity-20 blur-3xl animate-pulse"></div>
 
       <div className="relative max-w-5xl mx-auto text-center">
         {/* Title */}
         <h2 className="text-4xl md:text-5xl font-extrabold text-purple-800 mb-6">
           Why We Built{" "}
-          <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">
             PRISM
           </span>
         </h2>
 
         {/* Gradient divider */}
-        <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-green-400 mx-auto rounded-full mb-10"></div>
+        <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 mx-auto rounded-full mb-10"></div>
 
         {/* Description */}
         <p className="text-gray-700 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-16">
@@ -32,7 +32,7 @@ export default function Story() {
           and intra-operative phases of surgery. From automatic CT scan segmentation 
           to AI-assisted organ detection in mixed reality, PRISM is designed to reduce 
           surgical complications by up to 
-          <span className="font-semibold text-green-600"> 30%</span> and bring modern, accessible 
+          <span className="font-semibold text-purple-600"> 30%</span> and bring modern, accessible 
           innovation to the operating room — all at a low cost.
         </p>
 
