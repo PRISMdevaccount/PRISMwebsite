@@ -5,30 +5,50 @@ import { marked } from "marked";
 
 export default function Post({ frontmatter, content }) {
   return (
-    <article className="max-w-3xl mx-auto px-6 py-12 prose prose-lg prose-indigo">
-      {/* Title */}
-      <h1 className="text-4xl font-bold text-gray-900 mb-4">{frontmatter.title}</h1>
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-green-50">
+      {/* Hero Section */}
+      <header className="bg-gradient-to-r from-purple-400 to-green-400 text-white py-20 shadow-lg">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-5xl font-extrabold drop-shadow-lg mb-4">
+            {frontmatter.title}
+          </h1>
+          <p className="text-sm opacity-90">
+            {frontmatter.date} · {frontmatter.author}
+          </p>
+        </div>
+      </header>
 
-      {/* Meta info */}
-      <div className="text-sm text-gray-500 mb-8">
-        <span>{frontmatter.date}</span> · <span>{frontmatter.author}</span>
-      </div>
+      {/* Post Container */}
+      <main className="max-w-4xl mx-auto px-6 -mt-12 relative z-10">
+        <div className="bg-white rounded-2xl shadow-2xl p-8">
+          {/* Hero image if provided */}
+          {frontmatter.image && (
+            <img
+              src={frontmatter.image}
+              alt={frontmatter.title}
+              className="rounded-xl shadow-md mb-8 w-full"
+            />
+          )}
 
-      {/* Hero image */}
-      {frontmatter.image && (
-        <img
-          src={frontmatter.image}
-          alt={frontmatter.title}
-          className="rounded-xl shadow-md mb-8 w-full"
-        />
-      )}
+          {/* Markdown content */}
+          <article
+            className="prose prose-lg prose-indigo max-w-none prose-headings:font-bold prose-h2:text-purple-600 prose-h3:text-green-600 prose-a:text-purple-600 prose-a:font-semibold hover:prose-a:text-purple-800"
+            dangerouslySetInnerHTML={{ __html: marked(content) }}
+          />
 
-      {/* Markdown content */}
-      <div
-        className="prose prose-lg prose-indigo max-w-none"
-        dangerouslySetInnerHTML={{ __html: marked(content) }}
-      />
-    </article>
+          {/* Decorative Box */}
+          <div className="mt-12 p-6 rounded-xl bg-gradient-to-r from-green-100 to-purple-100 shadow-inner border-l-4 border-purple-400">
+            <h3 className="text-xl font-semibold text-purple-700 mb-2">
+              💡 Key Insight
+            </h3>
+            <p className="text-gray-700">
+              {frontmatter.takeaway ||
+                "This research reflects PRISM’s mission to push boundaries in surgical innovation."}
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }
 
