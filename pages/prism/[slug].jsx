@@ -1,71 +1,54 @@
-// pages/prism/[slug].jsx
-import Head from "next/head";
-import Navbar from "../../components/Navbar";
-import { getAllPosts, getPostBySlug } from "../../lib/get-posts";
-import { MDXRemote } from "next-mdx-remote";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
-import SectionWrapper from "../../components/SectionWrapper";
+import { MDXRemote } from "next-mdx-remote";
 
 export async function getStaticPaths() {
-  const posts = getAllPosts();
+  const files = fs.readdirSync(path.join("posts"));
+
+  const paths = files.map((filename) => ({
+    params: { slug: filename.replace(".md", "") },
+  }));
+
   return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    paths,
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }) {
-  const { slug } = params;
-  const { content, data } = getPostBySlug(slug);
+export async function getStaticProps({ params: { slug } }) {
+  const markdownWithMeta = fs.readFileSync(
+    path.join("posts", slug + ".md"),
+    "utf-8"
+  );
+
+  const { data: frontmatter, content } = matter(markdownWithMeta);
+
+  // ✅ ensure no undefined values
+  const safeFrontmatter = Object.fromEntries(
+    Object.entries(frontmatter).map(([key, value]) => [key, value ?? null])
+  );
+
   const mdxSource = await serialize(content);
-  return { props: { frontmatter: data, mdxSource } };
+
+  return {
+    props: {
+      frontmatter: safeFrontmatter,
+      slug,
+      mdxSource,
+    },
+  };
 }
 
 export default function PostPage({ frontmatter, mdxSource }) {
   return (
-    <>
-      <Head>
-        <title>{frontmatter.title} | PRISM</title>
-      </Head>
-      <Navbar />
-
-      {/* Hero banner */}
-      <div className="relative h-72 md:h-96 w-full overflow-hidden">
-        <img
-          src={frontmatter.image}
-          alt={frontmatter.title}
-          className="w-full h-full object-cover brightness-75"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
-            {frontmatter.title}
-          </h1>
-          <p className="mt-4 text-lg opacity-90">{frontmatter.date}</p>
-        </div>
+    <div className="max-w-3xl mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold mb-4">{frontmatter.title}</h1>
+      <p className="text-gray-500 mb-6">{frontmatter.date}</p>
+      <div className="prose prose-lg">
+        <MDXRemote {...mdxSource} />
       </div>
-
-      {/* Content */}
-      <main className="max-w-4xl mx-auto px-6 py-12 space-y-10">
-        <SectionWrapper>
-          <div className="bg-white shadow-xl rounded-2xl p-8 md:p-12 prose prose-lg prose-indigo max-w-none transition-transform hover:scale-[1.01]">
-            <MDXRemote {...mdxSource} />
-          </div>
-        </SectionWrapper>
-
-        {/* Callout box */}
-        <SectionWrapper>
-          <div className="bg-gradient-to-r from-purple-100 to-green-100 border-l-4 border-purple-400 rounded-xl p-6 shadow-md">
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              ✨ Our Mission
-            </h3>
-            <p className="text-gray-700 leading-relaxed">
-              PRISM was built to make pancreatic surgery safer and smarter.
-              Every story, every design choice, and every innovation has been
-              guided by that mission.
-            </p>
-          </div>
-        </SectionWrapper>
-      </main>
-    </>
+    </div>
   );
 }
