@@ -5,7 +5,7 @@ excerpt: Learn how the idea for PRISM originated and evolved into a real product
 image: /public/PRISM_Logo.png
 ---
 
-![PRISM Device Concept](/public/PRISM_Logo.png)
+![PRISM Device Concept](/public/PRISM_Logo.pngPRISM_Logo.png)
 
 # How PRISM Came to Life
 
