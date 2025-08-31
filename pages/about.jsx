@@ -47,14 +47,15 @@ export default function About() {
               </p>
             </div>
             <div className="md:w-1/2 flex justify-center">
-            <div className="bg-gradient-to-br from-purple-200 to-green-100 p-2 rounded-2xl shadow-md">
-              <img
-              src="/PRISM.png"
-              alt="PRISM Logo"
-              className="w-72 h-72 object-contain rounded-xl bg-white"
-              />
+              <div className="bg-gradient-to-br from-purple-200 to-green-100 p-2 rounded-2xl shadow-md">
+                <img
+                  src="/PRISM.png"
+                  alt="PRISM Logo"
+                  className="w-72 h-72 object-contain rounded-xl bg-white"
+                />
+              </div>
             </div>
-          </div>
+          </div> {/* ✅ this was missing */}
 
           {/* Divider */}
           <div className="border-t-2 border-green-100" />
