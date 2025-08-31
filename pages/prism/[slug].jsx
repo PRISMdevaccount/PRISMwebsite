@@ -21,14 +21,7 @@ export default function Post({ frontmatter, content }) {
       {/* Post Container */}
       <main className="max-w-4xl mx-auto px-6 -mt-12 relative z-10">
         <div className="bg-white rounded-2xl shadow-2xl p-8">
-          {/* Hero image if provided */}
-          {frontmatter.image && (
-            <img
-              src={frontmatter.image}
-              alt={frontmatter.title}
-              className="rounded-xl shadow-md mb-8 w-full"
-            />
-          )}
+          {/* Removed inline image rendering */}
 
           {/* Markdown content */}
           <article
