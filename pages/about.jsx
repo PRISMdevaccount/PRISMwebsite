@@ -47,11 +47,12 @@ export default function About() {
               </p>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <div className="bg-gradient-to-br from-purple-200 to-green-100 w-72 h-72 rounded-2xl flex items-center justify-center shadow-md">
-                <span className="text-purple-700 font-bold text-2xl">
-                  PRISM
-                </span>
-              </div>
+            <div className="bg-gradient-to-br from-purple-200 to-green-100 p-2 rounded-2xl shadow-md">
+              <img
+              src="/PRISM.png"
+              alt="PRISM Logo"
+              className="w-72 h-72 object-contain rounded-xl bg-white"
+              />
             </div>
           </div>
 
